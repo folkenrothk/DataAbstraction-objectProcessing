@@ -20,11 +20,16 @@ console = Console()
 
 def prepare_person_list_for_display(person_list: List[person.Person]) -> str:
     """Process the list of people for display in the console."""
-    # TODO: create an empty string that will contain all of the text
-    # TODO: iterate through each of the people in the person_list and
+    # create an empty string that will contain all of the text
+    workString = ""
+    # iterate through each of the people in the person_list and
     # add all of their textual details to a string; making sure to
+    for currentPerson in person_list:
+
     # TODO: preface each entry with a "-" and add a newline
     # TODO: return the list of generated text for each person
+    workString = person.Person.__repr__(currentPerson)
+    return workString
 
 
 @cli.command()
