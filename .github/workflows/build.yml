@@ -1,0 +1,108 @@
+# Basic workflow
+name: build
+
+# Controls when the action will run
+# Workflow begins with push or PR events
+# Focuses on the master branch only
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# Create one single job
+# This job performs all necessary checks
+jobs:
+  build:
+    # Use the latest version of Ubuntu on Microsoft Azure
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Performs all actions on different versions of Python
+        python-version: [3.9]
+    # Define the workflow steps
+    steps:
+    # Checkout the code of the repository
+        - name: Check out Repository Code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        # Run the mdl linting tool
+        # Refers to .mdlrc file in repository
+        - name: Run Markdown Linting
+          uses: actionshub/markdownlint@main
+        # Setup Python for the current language version
+        - name: Setup Python ${{ matrix.python-version }}
+          if: always()
+          uses: actions/setup-python@v1
+          with:
+            python-version: ${{ matrix.python-version }}
+        # Setup Java
+        - name: Set up JDK 1.8
+          if: always()
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        # Check for existence of gradle files
+        - name: Check for Existence of Files
+          uses: andstor/file-existence-action@v1
+          with:
+            files: "build.gradle, gradle.properties, settings.gradle, gatorgrader.yml"
+        # Install pip
+        - name: Install Pip
+          if: always()
+          run: |
+            pip install -U pip
+        # Install pipenv
+        - name: Install Pipenv
+          if: always()
+          run: |
+            pip install pipenv
+        # Install poetry
+        - name: Install Poetry
+          if: always()
+          uses: abatilo/actions-poetry@v2.0.0
+          with:
+            poetry-version: 1.1.8
+        # Run the Python program
+        - name: Run Python Program
+          if: always()
+          run: |
+            cd objectprocessor
+            poetry install
+            poetry run objectprocessor --search-term john79 --attribute email --input-file input/people.txt --output-file output/people.txt
+        # Run the black code formatter in checking mode
+        - name: Run Black Code Formatter
+          run: |
+            cd objectprocessor
+            poetry run task black
+        # Run the flake8 linting tool
+        - name: Run Flake8 Linting Tool
+          run: |
+            cd objectprocessor
+            poetry run task flake8
+        # Run the pydocstyle linting tool
+        - name: Run Pydocstyle Linting Tool
+          run: |
+            cd objectprocessor
+            poetry run task pydocstyle
+        # Run the pylint linting tool
+        - name: Run Pylint Linting Tool
+          run: |
+            cd objectprocessor
+            poetry run task pylint
+        # Run the mypy type checking tool
+        - name: Run Mypy Type Checking Tool
+          run: |
+            cd objectprocessor
+            poetry run task mypy
+        # Determine the version of Gradle
+        - name: Determine Gradle Version
+          if: always()
+          run: |
+            gradle --version
+        # Run GatorGrader: see config/gatorgrader.yml
+        - name: Run GatorGrader
+          if: always()
+          run:  |
+            gradle grade
