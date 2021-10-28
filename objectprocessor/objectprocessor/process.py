@@ -73,8 +73,8 @@ def find_matching_people(
     for currentPerson in person_data:
         # the current person has an attribute that contains the search term in match
         if attribute == match:
-            # add the current person to the matching_person_list
-            workingList.append(currentPerson)             
+          # add the current person to the matching_person_list
+          workingList.append(currentPerson)             
     # return the matching_person_list
     return workingList
 
@@ -83,20 +83,25 @@ def is_matching_person(
 ) -> bool:
     """Determine if the person's specified attribute contains the search term in match."""
     # the attribute for matching is name
-    if attribute == match and attribute is name:
-      return True
+    if attribute == "name":
+      if match == search_person.name:
+       return True
     # the attribute for matching is country
-    if attribute == match and attribute is country:
-      return True
+    elif attribute == "country":
+      if match == search_person.country:
+        return True
     # the attribute for matching is phone number
-    if attribute == match and attribute is phone_number:
-      return True
+    elif attribute == "phone_number":
+      if match == search_person.phone_number:
+        return True
     # the attribute for matching is job
-    if attribute == match and attribute is job:
-      return True
+    elif attribute == "job":
+      if match == search_person.job:
+        return True
     # the attribute for matching is email
-    if attribute == match and attribute is email:
-      return True
+    elif attribute == "email":
+      if match == search_person.email:
+        return True
     # return False if none of the conditions are matching
     else:
       return False
