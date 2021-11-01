@@ -34,21 +34,21 @@ def extract_person_data(data: str) -> List[person.Person]:
         quoting=csv.QUOTE_ALL,
         skipinitialspace=True,
     ):
-    # extract each of the attributes about a person from the line variable
-    name = line[person.person_index.Name]
-    country = line[person.person_index.Country]
-    phone_number = line[person.person_index.Phone_Number]
-    job = line[person.person_index.Job]
-    email = line[person.person_index.Email]
-    # construct a new instance of the Person class that contains all
-    # of the attributes that were extracted from the CSV file
-    currentPerson = person.Person(name, country, phone_number, job, email)
-    # append the current instance of the person class to the data_list variable
-    extractList.append(currentPerson)
-    # return the list of all of the specified column
-    return extractList
+      # extract each of the attributes about a person from the line variable
+      name = line[person.person_index.Name]
+      country = line[person.person_index.Country]
+      phone_number = line[person.person_index.Phone_Number]
+      job = line[person.person_index.Job]
+      email = line[person.person_index.Email]
+      # construct a new instance of the Person class that contains all
+      # of the attributes that were extracted from the CSV file
+      currentPerson = person.Person(name, country, phone_number, job, email)
+      # append the current instance of the person class to the data_list variable
+      extractList.append(currentPerson)
+      # return the list of all of the specified column
+      return extractList
 
-def write_person_data(file_name: str, person_data: List[person.Person]) -> None:
+def write_person_data(outFile: str, person_data: List[person.Person]) -> None:
     """Write the person data stored in a list to the specified file."""
     # create an empty list that will store the person data as a list of strings
     workingList = []
@@ -61,7 +61,9 @@ def write_person_data(file_name: str, person_data: List[person.Person]) -> None:
       workingList.append(convertPerson)
     # use the csv.writer approach and the writerows function to write out
     # the list of lists of strings that contain all of the person data
-    csv.writer
+    writer = csv.writer(outFile)
+    writer.writerows(workingList)
+
 
 def find_matching_people(
     attribute: str, match: str, person_data: List[person.Person]
@@ -72,11 +74,13 @@ def find_matching_people(
     # iterate through all of the people in the person_data list
     for currentPerson in person_data:
         # the current person has an attribute that contains the search term in match
-        if attribute == match:
+        if is_matching_person(attribute, match, currentPerson) is True:
           # add the current person to the matching_person_list
           workingList.append(currentPerson)             
     # return the matching_person_list
     return workingList
+
+
 
 def is_matching_person(
     attribute: str, match: str, search_person: person.Person

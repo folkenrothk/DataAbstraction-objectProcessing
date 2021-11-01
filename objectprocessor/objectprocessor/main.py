@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List
 
 import typer
+import csv
 
 from rich.console import Console
 
@@ -24,11 +25,19 @@ def prepare_person_list_for_display(person_list: List[person.Person]) -> str:
     workString = ""
     # iterate through each of the people in the person_list and
     # add all of their textual details to a string; making sure to
-    for currentPerson in person_list:
+#    for currentPerson in person_list:
 
+#///
+#person_list_text = ""
+#    for current_person in person_list:
+#      person_list_text +=
+#        "- " + str(current_person) + "\n"
+#    return person_list_text
+
+    
     # TODO: preface each entry with a "-" and add a newline
     # TODO: return the list of generated text for each person
-    workString = person.Person.__repr__(currentPerson)
+#    workString = person.Person.__repr__(currentPerson)
     return workString
 
 
@@ -48,9 +57,20 @@ def main(
         raise typer.Abort()
     # the file was specified and it is valid so we should read and check it
     if input_file.is_file():
-        # TODO: read in the data from the specified file containing information about people
-        # TODO: transform the data in the CSV file (now in a string) into a list of instances of the Person class
-        # TODO: search for the people with an attribute that matches the search term
-        # TODO: display the details about the matching people to the console
-        # TODO: make sure to use the prepare_person_list_for_display function for creating a suitable display
-        # TODO: save the details about the matching people to the file system in the specified output directory
+        # read in the data from the specified file containing information about people
+   #     inFile = open(input_file, "r")
+   #     readInFile = csv.reader(inFile)
+   #     inFileData = list(readInFile)
+   #     mainList = []
+        # transform the data in the CSV file (now in a string) into a list of instances of the Person class
+   #     for row in readInFile:
+   #         currentPerson = process.extract_person_data(str(inFileData))
+   #         mainList.append(currentPerson)
+        # search for the people with an attribute that matches the search term
+   #     matchList = process.find_matching_people(attribute, search_term, mainList)
+   #     print(matchList)
+        # display the details about the matching people to the console
+        
+        # make sure to use the prepare_person_list_for_display function for creating a suitable display
+        
+        # save the details about the matching people to the file system in the specified output directory
