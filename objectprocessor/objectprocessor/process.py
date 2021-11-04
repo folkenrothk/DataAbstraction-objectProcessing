@@ -34,7 +34,6 @@ def extract_person_data(data: str) -> List[person.Person]:
         quoting=csv.QUOTE_ALL,
         skipinitialspace=True,
     ):
-        print(csv.reader)
         # extract each of the attributes about a person from the line variable
         # construct a new instance of the Person class that contains all
         # of the attributes that were extracted from the CSV file
@@ -87,23 +86,23 @@ def is_matching_person(
     """Determine if the person's specified attribute contains the search term in match."""
     # the attribute for matching is name
     if attribute == "name":
-        if match == search_person.name:
+        if match in search_person.name:
             return True
     # the attribute for matching is country
     elif attribute == "country":
-        if match == search_person.country:
+        if match in search_person.country:
             return True
     # the attribute for matching is phone number
     elif attribute == "phone_number":
-        if match == search_person.phone_number:
+        if match in search_person.phone_number:
             return True
     # the attribute for matching is job
     elif attribute == "job":
-        if match == search_person.job:
+        if match in search_person.job:
             return True
     # the attribute for matching is email
     elif attribute == "email":
-        if match == search_person.email:
+        if match in search_person.email:
             return True
     # return False if none of the conditions are matching
     else:
