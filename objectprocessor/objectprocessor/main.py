@@ -74,4 +74,4 @@ def main(
         console.print(
             f":sparkles: Saving the matching people to the file {output_file}"
         )
-        process.write_person_data(output_file, matchList)
+        process.write_person_data(str(output_file), matchList)

@@ -88,22 +88,32 @@ def is_matching_person(
     if attribute == "name":
         if match in search_person.name:
             return True
+        else:
+            return False
     # the attribute for matching is country
     elif attribute == "country":
         if match in search_person.country:
             return True
+        else:
+            return False
     # the attribute for matching is phone number
     elif attribute == "phone_number":
         if match in search_person.phone_number:
             return True
+        else:
+            return False
     # the attribute for matching is job
     elif attribute == "job":
         if match in search_person.job:
             return True
+        else:
+            return False
     # the attribute for matching is email
     elif attribute == "email":
         if match in search_person.email:
             return True
+        else:
+            return False
     # return False if none of the conditions are matching
     else:
         return False
