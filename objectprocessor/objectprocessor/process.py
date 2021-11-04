@@ -34,19 +34,16 @@ def extract_person_data(data: str) -> List[person.Person]:
         quoting=csv.QUOTE_ALL,
         skipinitialspace=True,
     ):
-      # extract each of the attributes about a person from the line variable
-      name = line[person.person_index.Name]
-      country = line[person.person_index.Country]
-      phone_number = line[person.person_index.Phone_Number]
-      job = line[person.person_index.Job]
-      email = line[person.person_index.Email]
-      # construct a new instance of the Person class that contains all
-      # of the attributes that were extracted from the CSV file
-      currentPerson = person.Person(name, country, phone_number, job, email)
-      # append the current instance of the person class to the data_list variable
-      extractList.append(currentPerson)
-      # return the list of all of the specified column
-      return extractList
+        print(csv.reader)
+        # extract each of the attributes about a person from the line variable
+        # construct a new instance of the Person class that contains all
+        # of the attributes that were extracted from the CSV file
+        currentPerson = person.Person(line[0], line[1], line[2], line[3], line[4])
+        # append the current instance of the person class to the data_list variable
+        extractList.append(currentPerson)
+        # return the list of all of the specified column
+    return extractList
+
 
 def write_person_data(outFile: str, person_data: List[person.Person]) -> None:
     """Write the person data stored in a list to the specified file."""
@@ -54,15 +51,18 @@ def write_person_data(outFile: str, person_data: List[person.Person]) -> None:
     workingList = []
     # iterate through every person inside of the person_data list
     for currentPerson in person_data:
-      # create a list out of this person where each of the person's
-      # attributes are stored inside of an index in the list
-      convertPerson = person.Person.create_list(currentPerson)
-      # append this converted person list to the list called converted_person_data
-      workingList.append(convertPerson)
+        # create a list out of this person where each of the person's
+        # attributes are stored inside of an index in the list
+        convertPerson = person.Person.create_list(currentPerson)
+        # append this converted person list to the list called converted_person_data
+        workingList.append(convertPerson)
     # use the csv.writer approach and the writerows function to write out
     # the list of lists of strings that contain all of the person data
-    writer = csv.writer(outFile)
-    writer.writerows(workingList)
+    with open(outFile, "w", newline="") as csvfile:
+        writer = csv.writer(
+            csvfile, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL
+        )
+        writer.writerows(workingList)
 
 
 def find_matching_people(
@@ -75,11 +75,10 @@ def find_matching_people(
     for currentPerson in person_data:
         # the current person has an attribute that contains the search term in match
         if is_matching_person(attribute, match, currentPerson) is True:
-          # add the current person to the matching_person_list
-          workingList.append(currentPerson)             
+            # add the current person to the matching_person_list
+            workingList.append(currentPerson)
     # return the matching_person_list
     return workingList
-
 
 
 def is_matching_person(
@@ -88,24 +87,24 @@ def is_matching_person(
     """Determine if the person's specified attribute contains the search term in match."""
     # the attribute for matching is name
     if attribute == "name":
-      if match == search_person.name:
-       return True
+        if match == search_person.name:
+            return True
     # the attribute for matching is country
     elif attribute == "country":
-      if match == search_person.country:
-        return True
+        if match == search_person.country:
+            return True
     # the attribute for matching is phone number
     elif attribute == "phone_number":
-      if match == search_person.phone_number:
-        return True
+        if match == search_person.phone_number:
+            return True
     # the attribute for matching is job
     elif attribute == "job":
-      if match == search_person.job:
-        return True
+        if match == search_person.job:
+            return True
     # the attribute for matching is email
     elif attribute == "email":
-      if match == search_person.email:
-        return True
+        if match == search_person.email:
+            return True
     # return False if none of the conditions are matching
     else:
-      return False
+        return False

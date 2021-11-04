@@ -24,20 +24,11 @@ def prepare_person_list_for_display(person_list: List[person.Person]) -> str:
     # create an empty string that will contain all of the text
     workString = ""
     # iterate through each of the people in the person_list and
-    # add all of their textual details to a string; making sure to
-#    for currentPerson in person_list:
-
-#///
-#person_list_text = ""
-#    for current_person in person_list:
-#      person_list_text +=
-#        "- " + str(current_person) + "\n"
-#    return person_list_text
-
-    
-    # TODO: preface each entry with a "-" and add a newline
-    # TODO: return the list of generated text for each person
-#    workString = person.Person.__repr__(currentPerson)
+    for current_person in person_list:
+        # add all of their textual details to a string; making sure to
+        # preface each entry with a "-" and add a newline
+        workString += "- " + str(current_person) + "\n"
+    # return the list of generated text for each person
     return workString
 
 
@@ -58,19 +49,33 @@ def main(
     # the file was specified and it is valid so we should read and check it
     if input_file.is_file():
         # read in the data from the specified file containing information about people
-   #     inFile = open(input_file, "r")
-   #     readInFile = csv.reader(inFile)
-   #     inFileData = list(readInFile)
-   #     mainList = []
+        with open(input_file, "r") as csvfile:
+            process.extract_person_data(csvfile.read())
         # transform the data in the CSV file (now in a string) into a list of instances of the Person class
-   #     for row in readInFile:
-   #         currentPerson = process.extract_person_data(str(inFileData))
-   #         mainList.append(currentPerson)
-        # search for the people with an attribute that matches the search term
-   #     matchList = process.find_matching_people(attribute, search_term, mainList)
-   #     print(matchList)
-        # display the details about the matching people to the console
-        
-        # make sure to use the prepare_person_list_for_display function for creating a suitable display
-        
-        # save the details about the matching people to the file system in the specified output directory
+        # search for the people with an attribute that matches the search term        
+
+        # matchList = process.find_matching_people(attribute, search_term, mainList)
+        # # display the details about the matching people to the console
+        # console.print(str(matchList))
+        # # make sure to use the prepare_person_list_for_display function for creating a suitable display
+        # displayList = prepare_person_list_for_display(matchList)
+        # console.print(displayList)
+        # # save the details about the matching people to the file system in the specified output directory
+        # process.write_person_data(output_file, matchList)
+
+        console.print(
+            f":abacus: Reading in the data from the specfied file {input_file}"
+            )
+        console.print()
+        console.print(
+            ":rocket: Parsing the data file and transforming it into people objects"
+            )
+        console.print()
+        console.print(
+            f":man_detective: Searching for the people with an {attribute} that matches the search term '{search_term}'"
+        )
+        console.print()
+        console.print(str())
+        console.print(
+            f":sparkles: Saving the matching people to the file {output_file}"
+        )
