@@ -116,7 +116,7 @@ def __init__(
     self.email = email
 ```
 
-This segment of code is a the double underscore (dunder) init function of the class Person. This function will run defaultly when the class Person is called. The function take in itself and 5 strings (one for name, country, phone number, job, and email) as input.  This acts as the constructor of the class. It label each of these actual parameters as its own attributes. This functions similarly to dictionaries. When we refer to a specific person, it has these attributes that we can search for within itself by calling its job or phone number.
+This segment of code is the double underscore (dunder) init function of the class Person. This function will run defaultly when the class Person is called. The function takes in itself and 5 strings (one for name, country, phone number, job, and email) as input.  This acts as the constructor of the class. It labels each of these actual parameters as its own attributes. This functions similarly to dictionaries. When we refer to a specific person, it has these attributes that we can search for within itself by calling its job or phone number.
 
 ### Describe in detail how the provided source code works
 
@@ -126,7 +126,7 @@ def __repr__(self) -> str:
       return f"{self.name} is a {self.job} who lives in {self.country}. You can call this person at {self.phone_number} and email them {self.email}."
 ```
 
-This segment of code is the double underscore (dunder) repr function of the class Person. This funtion is called when the class Person is being displayed or represented in a string format. The function only needs itself (specifically its attributes from the dunder init function) as input and outputs a string representation of itself. This function just has an f string as its return which calls the attributes of itself to fill in the bracketed sections in the sentence.
+This segment of code is the initialization of the double underscore (dunder) repr function of the class Person. This function is called when the class Person is being displayed or represented in a string format. The function only needs itself (specifically its attributes from the dunder init function) as input and outputs a string representation of itself. This function just has an f string as its return which calls the attributes of itself to fill in the bracketed sections in the sentence.
 
 ## Professional Development
 
